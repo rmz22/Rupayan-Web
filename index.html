@@ -27,7 +27,8 @@
             --font-pixel: 'VT323', monospace;
         }
 
-        body { font-family: var(--font-main); background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; scroll-behavior: smooth; }
+        html { scroll-padding-top: 100px; }
+        body { font-family: var(--font-main); background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; scroll-behavior: smooth; width: 100%; min-height: 100vh; }
 
         .dark-grid-bg { background-color: var(--bg-dark); background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 60px 60px; }
         .light-grid-bg { background-color: var(--bg-beige); background-image: linear-gradient(var(--grid-line-dark) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line-dark) 1px, transparent 1px); background-size: 40px 40px; }
@@ -43,10 +44,10 @@
         .rocket-flame { position:absolute; bottom:-20%; left:0; width:100%; height:50%; background: radial-gradient(ellipse at bottom, rgba(255,234,0,0.8) 0%, rgba(255,102,0,0.6) 40%, transparent 70%); z-index:1; opacity:0; filter: blur(30px);}
 
         /* --- CURSOR SYSTEM & AMBIENT GLOW --- */
-        .bg-glow { position: fixed; top: 0; left: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(195,69,45,0.12) 0%, transparent 65%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); z-index: 0; filter: blur(30px); mix-blend-mode: screen; transition: opacity 0.5s ease; opacity: 0; }
+        .bg-glow { position: fixed; top: 0; left: 0; width: 600px; height: 600px; background: radial-gradient(circle, rgba(195,69,45,0.12) 0%, transparent 65%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); z-index: 0; filter: blur(30px); mix-blend-mode: screen; transition: opacity 0.5s ease; opacity: 0; will-change: transform, opacity; }
         body:hover .bg-glow { opacity: 1; }
-        .cursor-dot { width: 10px; height: 10px; background: var(--highlight); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; transform: translate(-50%, -50%); z-index: 10000; box-shadow: 0 0 15px rgba(195,69,45,0.8); mix-blend-mode: difference;}
-        .cursor-follow { width: 50px; height: 50px; border: 2px solid rgba(195,69,45,0.6); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1), height 0.3s cubic-bezier(0.19, 1, 0.22, 1); mix-blend-mode: difference;}
+        .cursor-dot { width: 10px; height: 10px; background: var(--highlight); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; transform: translate(-50%, -50%); z-index: 10000; box-shadow: 0 0 15px rgba(195,69,45,0.8); mix-blend-mode: difference; will-change: transform; }
+        .cursor-follow { width: 50px; height: 50px; border: 2px solid rgba(195,69,45,0.6); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1), height 0.3s cubic-bezier(0.19, 1, 0.22, 1); mix-blend-mode: difference; will-change: width, height, transform; }
         .cursor-hover { width: 80px; height: 80px; background: rgba(195,69,45,0.15); backdrop-filter: blur(2px); border-color: var(--highlight); box-shadow: 0 0 30px rgba(195,69,45,0.3);}
 
         /* --- TOP NAV --- */
@@ -92,7 +93,7 @@
             50% { transform: translateY(-15px) scale(1.03) rotate(1deg); text-shadow: 0px 25px 0px rgba(195,69,45,0.8), 0 0 45px rgba(195,69,45,0.6); } 
             100% { transform: translateY(0px) scale(1) rotate(-1deg); text-shadow: 0px 5px 0px rgba(195,69,45,0.2), 0 0 20px rgba(195,69,45,0.2); } 
         }
-        .title-massive { font-family: var(--font-head); font-size: clamp(4rem, 8vw, 10rem); font-weight: 800; color: #fff; letter-spacing: 2px; margin-bottom: 2rem; white-space: nowrap; animation: epicHeroFloat 5s infinite ease-in-out; }
+        .title-massive { font-family: var(--font-head); font-size: clamp(4rem, 8vw, 10rem); font-weight: 800; color: #fff; letter-spacing: 2px; margin-bottom: 2rem; white-space: nowrap; animation: epicHeroFloat 5s infinite ease-in-out; will-change: transform, text-shadow; }
         
         .skew-banner { background: #111; border: 1px solid #333; padding: 15px 50px; margin-bottom: 3rem; box-shadow: 0 10px 20px rgba(0,0,0,0.5); border-radius: 4px; animation: floatBtn 4s infinite alternate ease-in-out;}
         .skew-banner span { display: inline-block; font-family: var(--font-main); font-weight: 700; font-size: clamp(1rem, 1.5vw, 1.5rem); color: #fff; letter-spacing: 2px; }
@@ -141,7 +142,7 @@
         .pol-top-left { top: -30px; left: -20px; --rot: -10deg; }
         .pol-btm-right { bottom: -30px; right: -20px; --rot: 15deg; }
 
-        .about-text-col { flex: 1; min-width: 350px; max-width: 600px; z-index: 5;}
+        .about-text-col { flex: 1; min-width: min(100%, 300px); max-width: 600px; z-index: 5;}
         .about-title { font-family: var(--font-main); font-size: 3.5rem; font-weight: 800; color: #111; line-height: 1.1; margin-bottom: 2rem; letter-spacing: -1px;}
         .about-title span.morph-text { color: var(--highlight); display: inline-block; }
         
@@ -152,7 +153,7 @@
 
         /* --- SKILLS & BENTO CARDS (PREMIUM MINIMAL & THEMED) --- */
         .section-container { max-width: 1200px; margin: 0 auto; padding: 6rem 5%; position: relative; z-index: 10; }
-        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 40px; }
         
         @keyframes minimalPulse { 0% { transform: translateY(0px) scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); } 100% { transform: translateY(-5px) scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,0.8); } }
         
@@ -222,7 +223,7 @@
 
         /* --- THEMED SOCIALS & GATEWAYS (VIBRANT SOCIAL BRANDS) --- */
         .footer-blocks { max-width: 1200px; margin: 0 auto; padding: 6rem 5% 4rem 5%; display: flex; flex-wrap: wrap; gap: 60px; align-items: flex-start; }
-        .contact-col, .payment-col { flex: 1; min-width: 350px; }
+        .contact-col, .payment-col { flex: 1; min-width: min(100%, 300px); }
         .section-header-kalam { font-family: var(--font-hand); font-size: 3rem; color: #fff; margin-bottom: 2.5rem; transform: rotate(-2deg); letter-spacing: 1px;}
         
         @keyframes pulseSocialGlow { 0% { box-shadow: 0 10px 20px var(--glow-ambient); } 100% { box-shadow: 0 20px 40px var(--glow-bright); } }
@@ -267,26 +268,48 @@
         .gsap-reveal { opacity: 0; visibility: hidden; }
         
         @media(max-width: 900px){
-            .top-nav { display: flex; flex-direction: column; gap: 15px; padding: 1rem; align-items: center; justify-content: center; }
-            .top-nav.scrolled { padding: 1rem; }
-            .nav-logo { flex: none; justify-content: center; }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px;}
-            .nav-cta { display: none; }
-            .title-massive { font-size: 4rem; white-space: normal; text-align:center; animation: none;}
-            .skew-banner { transform: skewX(0) rotate(0); padding: 15px; text-align:center; animation: none;}
-            .skew-banner span { transform: skewX(0); font-size: 1.1rem; }
-            .hero-star, .hero-cube, .hero-sparkle, .hero-ring-back, .hero-orb, .hero-cross { display: none; }
+            .top-nav { display: flex !important; flex-direction: row; justify-content: space-between; align-items: center; padding: 15px 5%; box-sizing: border-box; background: rgba(7, 7, 7, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 10000; }
+            .top-nav.scrolled { padding: 10px 5%; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+            .nav-logo { flex: none; text-align: left; font-size: 1.2rem; margin: 0; animation: none; font-weight: 900;}
+            .nav-links { display: none !important; }
+            .nav-cta { display: flex !important; flex: none; }
+            .status-pill { font-size: clamp(0.65rem, 2.5vw, 0.8rem); padding: 6px 12px; gap: 6px; border: 1px solid rgba(255,255,255,0.1); white-space: nowrap; }
+            .status-pill .dot { width: 6px; height: 6px; flex-shrink: 0; }
+            .title-massive { font-size: clamp(2.5rem, 12vw, 4rem); white-space: normal; text-align:center;}
+            .skew-banner { transform: skewX(0) rotate(0); padding: 12px 20px; text-align:center; width: 90%; max-width: 400px; margin: 0 auto 2rem auto; }
+            .skew-banner span { transform: skewX(0); font-size: clamp(0.85rem, 4vw, 1.1rem); }
+            .hero-star { width: 50px; height: 50px; left: -2vw; top: 5vh; }
+            .hero-cube { width: 35px; height: 35px; left: 5vw; bottom: 8vh; border-width: 2px;}
+            .hero-sparkle { width: 35px; height: 35px; right: 2vw; top: -10px; }
+            .hero-orbit { font-size: 0.8rem; right: 2vw; top: 25vh; }
+            .hero-ring-back { width: 70px; height: 70px; left: 5vw; bottom: 15vh; border-width: 1px;}
+            .hero-orb { width: 140px; height: 140px; left: -5vw; top: 15vh; }
+            .hero-cross { font-size: 3rem; right: 8vw; top: 10vh; }
             .about-grid { flex-direction: column; align-items: center; gap: 40px; }
-            .collage-col { transform: scale(0.85); margin-bottom: 30px;}
-            .pixel-title { font-size: 1.8rem; }
-            .pixel-title span { font-size: 2.5rem; }
-            .white-pill { padding: 20px; flex-direction: column; gap: 20px; border-radius: 30px; }
-            .retro-lcd { width: 100%; }
-            .prominent-stack { width: 100%; max-width: 250px; height: 250px; }
-            .prominent-stack .stack-item { width: 220px; height: 220px; }
+            .collage-col { width: 100%; aspect-ratio: 0.9; height: auto; max-width: 350px; margin: 0 auto 30px auto; transform: none; animation: none;}
+            .main-photo { width: 70%; aspect-ratio: 3/4; height: auto; left: 15%; top: 10%; }
+            .collage-bg-circ { width: 65%; height: 75%; left: 0%; top: 15%; border-radius: 40px 80px 20px 100px; }
+            .pol-photo { transform: scale(0.7) !important; padding: 10px 10px 35px 10px;}
+            .pol-top-left { left: -15%; top: -10%; }
+            .pol-btm-right { right: -15%; bottom: -5%; }
+            .pixel-title { font-size: clamp(1.2rem, 5vw, 1.5rem); text-align: center; margin-bottom: 2rem;}
+            .pixel-title span { font-size: clamp(1.8rem, 8vw, 2.5rem); display: block; margin-top: 10px; }
+            .white-pill { padding: 25px; flex-direction: column; gap: 25px; border-radius: 30px; width: 95%; max-width: 380px; margin: 0 auto; box-sizing: border-box;}
+            .retro-lcd { width: 100%; box-sizing: border-box; }
+            .prominent-stack { width: 100%; max-width: 70vw; height: 70vw; max-height: 250px; perspective: 800px; }
+            .prominent-stack .stack-item { width: 60vw; height: 60vw; max-width: 220px; max-height: 220px; box-sizing: border-box;}
             .payment-grid { grid-template-columns: 1fr; }
+            .gateway-card { padding: 20px 15px; }
+            .flat-link-btn { padding: 20px 25px; font-size: clamp(1rem, 4vw, 1.2rem); }
+            .behance-btn-exact { padding: 15px; font-size: clamp(1rem, 4.5vw, 1.3rem); width: 100%; max-width: 350px; text-align: center; flex-direction: column; gap: 15px; margin: 0 auto; box-sizing: border-box;}
             * { cursor: auto !important; }
             .bg-glow, .cursor-dot, .cursor-follow { display: none !important; }
+            
+            .section-container, .about-section, .music-platform, .footer-blocks { padding-top: 3rem; padding-bottom: 3rem; }
+            .bento-grid { gap: 20px; grid-template-columns: 1fr; }
+            .footer-grid { gap: 30px; grid-template-columns: 1fr; text-align: center; }
+            .about-white-box { padding: 25px; text-align: center; }
+            .marquee-inner span { font-size: clamp(1.2rem, 5vw, 1.8rem); margin: 0 15px; }
         }
     </style>
 </head>
@@ -348,9 +371,9 @@
         <div class="about-grid">
             <div class="collage-col">
                 <div class="collage-bg-circ"></div>
-                <div class="pol-photo pol-top-left"><img src="596520867_1176630011289373_5795759390390422092_n copy.jpg" alt="Polaroid 1"><span>&lt;3</span></div>
-                <img src="IMG_20251029_200013.jpg" class="main-photo" alt="Rupayan">
-                <div class="pol-photo pol-btm-right"><img src="WhatsApp Image 2026-04-04 at 22.26.14.jpeg" alt="Polaroid 2"><span>Bocetos</span></div>
+                <div class="pol-photo pol-top-left"><img src="596520867_1176630011289373_5795759390390422092_n copy.jpg" alt="Polaroid 1" loading="lazy"><span>&lt;3</span></div>
+                <img src="IMG_20251029_200013.jpg" class="main-photo" alt="Rupayan" loading="lazy">
+                <div class="pol-photo pol-btm-right"><img src="WhatsApp Image 2026-04-04 at 22.26.14.jpeg" alt="Polaroid 2" loading="lazy"><span>Bocetos</span></div>
             </div>
             <div class="about-text-col">
                 <div class="about-title"><span class="morph-text" id="langMorph">Hey I'm 👋</span><br>RUPAYAN</div>
@@ -418,7 +441,7 @@
     <div class="behance-showcase gsap-reveal" id="work">
         <a href="https://www.behance.net/rupayan" target="_blank" class="behance-btn-exact" data-hover>
             <div class="behance-circle-logo">
-                <img src="Behance.png" alt="Behance Logo">
+                <img src="Behance.png" alt="Behance Logo" loading="lazy">
             </div>
             All My Work Lives on Behance.
         </a>
@@ -687,7 +710,7 @@
             const trueIndex = tracks.length - 1 - reversedIndex;
             const item = document.createElement('div');
             item.className = 'stack-item';
-            item.innerHTML = `<img src="${t.cover}">`;
+            item.innerHTML = `<img src="${t.cover}" loading="lazy" alt="Cover">`;
             item.addEventListener('click', () => { 
                 if(actIdx !== trueIndex) {
                     actIdx = trueIndex; 
